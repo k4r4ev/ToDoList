@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Revalia&display=swap");
+
+body {
+    margin: 0;
+    background-color: darkolivegreen;
+    font-family: Roboto, serif;
+}
+
+h2 {
+    font-size: 25px;
+    text-align: center;
+    color: lightsteelblue;
+    outline: none;
+    margin-right: 5px;
+}
+
+hr {
+    border: none;
+    color: brown;
+    background-color: brown;
+    height: 4px;
+}
+
+.over {
+    visibility: hidden;
+}
+
+.container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.logo {
+    font-family: Revalia, serif;
+    font-weight: bolder;
+    font-size: 30px;
+    text-align: center;
+    color: darkolivegreen;
+    margin-left: 20px;
+}
+
+.panel {
+    width: 100%;
+    height: 50px;
+    background-color: brown;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panelInput1 {
+    background-color: darkolivegreen;
+    border: none;
+    height: 30px;
+    width: 200px;
+    border-radius: 10px 0 0 10px;
+    color: lightsteelblue;
+    outline: none;
+    text-align: center;
+    border-right: rgb(72, 90, 41) solid 1px;
+    padding: 0 10px;
+}
+
+.panelInput2 {
+    background-color: darkolivegreen;
+    border: none;
+    height: 32px;
+    width: 100px;
+    color: lightsteelblue;
+    outline: none;
+    text-align: center;
+    margin-right: 0;
+    padding: 0 10px;
+}
+
+.panelInput3 {
+    background-color: darkolivegreen;
+    border: none;
+    height: 30px;
+    border-radius: 0 10px 10px 0;
+    border-left: rgb(72, 90, 41) solid 1px;
+    color: lightsteelblue;
+    outline: none;
+    text-align: center;
+    margin-right: 30px;
+    padding: 0 10px;
+}
+
+.desk {
+    width: 400px;
+    border: 4px solid brown;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.desk a {
+    background-color: darkolivegreen;
+    font-size: 15px;
+    border: none;
+    height: 30px;
+    border-radius: 10px;
+    color: lightslategrey;
+    outline: none;
+    text-align: center;
+    padding: 0;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+
+.desk span span {
+    color: lightslategrey;
+}
+
+.deskInput {
+    background-color: brown;
+    border: none;
+    height: 30px;
+    width: 170px;
+    border-radius: 10px 0 0 10px;
+    border-right: rgb(197, 48, 48) solid 1px;
+    color: lightsteelblue;
+    outline: none;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.deskButton {
+    background-color: brown;
+    border: none;
+    height: 32px;
+    width: 100px;
+    border-radius: 0 10px 10px 0;
+    color: lightsteelblue;
+    outline: none;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.desk ol {
+    color: lightsteelblue;
+}
+
+.desk li {
+    font-size: 20px;
+    width: 300px;
+    outline: none;
+}
+
+.complete {
+    text-decoration: line-through;
+}
+
+.desk div {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
