@@ -5,22 +5,29 @@ import Data from "../data";
 class Body extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            count: 1
-        };
         this.storage = new Data();
+        this.state = {
+            deskNumber: this.storage.storage.desks.length
+        };
         console.log(this.storage);
     }
 
-    deskStateHandler = () => {
+    createDesk = () => {
         this.setState({
-            count: this.state.count + 1,
+            deskNumber: this.state.deskNumber + 1,
+        });
+        this.storage.createDesk();
+    };
+
+    reduceDeskNumber = () => {
+        this.setState({
+            deskNumber: this.state.deskNumber - 1,
         });
     };
 
-    clearAll = () => {
+    deleteAll = () => {
         document.getElementById("container").innerHTML = "";
-        this.storage.createDesk();
+        this.storage.deleteAll();
     };
 
     render() {
@@ -29,17 +36,20 @@ class Body extends React.Component {
                 <div className="panel" id="panel">
                     <div className="logo">ToDoList</div>
                     <div>
-                        <input type="input" id="deskName" class="panelInput1" placeholder="The name of the desk"/>
-                        <input type="button" id="createDesk" class="panelInput2" onClick={this.deskStateHandler}
+                        <input type="input" id="deskName" class="panelInput" placeholder="The name of the desk"/>
+                        <input type="button" id="createDesk" class="panelButton1" onClick={this.createDesk}
                                value="Add new desk"/>
-                        <input type="button" id="clear" class="panelInput3" onClick={this.clearAll}
+                        <input type="button" id="clear" class="panelButton2" onClick={this.deleteAll}
                                value="Delete all desk"/>
                     </div>
                 </div>
                 <div className="container" id="container">
-                    {[...Array(this.state.count)].map(() => <Desk name={this.storage.storage.desks[0].name}
-                                                                  tasks={this.storage.storage.desks[0].tasks}
-                                                                  storage={this.storage}/>)}
+                    {this.storage.storage.desks.map((currentElement, index) => <Desk
+                        name={this.storage.storage.desks[index].name}
+                        tasks={this.storage.storage.desks[index].tasks}
+                        reduceDeskNumber={this.reduceDeskNumber}
+                        deskOrder={index + 1}
+                        storage={this.storage}/>)}
                 </div>
             </div>
         )

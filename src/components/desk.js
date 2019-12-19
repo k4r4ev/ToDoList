@@ -5,41 +5,50 @@ class Desk extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            count: 1
+            taskNumber: 1
         };
         this.storage = this.props.storage;
     }
 
-    taskStateHandler = () => {
+    increaseTaskNumber = () => {
         this.setState({
-            count: this.state.count + 1,
+            taskNumber: this.state.taskNumber + 1,
         });
     };
 
-    createDesk = () => {
-        this.storage.storage.desks[0].tasks.push(document.getElementById("ol1_input").value);
-        console.log(this.storage);
-    };
-
-    deleteDesk = () => {
-
+    reduceTaskNumber = () => {
+        this.setState({
+            taskNumber: this.state.taskNumber - 1,
+        });
     };
 
     render() {
         return (
-            <div id="d1" className="desk" draggable="true">
+            <div id={"d" + this.props.deskOrder} className="desk" draggable="true">
                 <div className="title">
-                    <h2>{this.props.name}</h2>
-                    <a onClick={this.deleteDesk}>delete</a>
+                    <h2>{"#" + this.props.deskOrder + " " + this.props.name}</h2>
+                    <a onClick={this.props.reduceDeskNumber}>delete</a>
+                    <a>
+                        <div className="circle blue"/>
+                    </a>
+                    <a>
+                        <div className="circle red"/>
+                    </a>
+                    <a>
+                        <div className="circle green"/>
+                    </a>
                 </div>
                 <hr/>
-                <ol className="list" id="ol1">
-                    {[...Array(this.state.count)].map(() => <Task name="task"/>)}
+                <ol className="list" id={"ol" + this.props.deskOrder}>
+                    {[...Array(this.state.taskNumber)].map((currentElement, index) => <Task name="task"
+                                                                                            deskOrder={this.props.deskOrder}
+                                                                                            taskOrder={index + 1}
+                                                                                            reduceTaskNumber={this.reduceTaskNumber}/>)}
                 </ol>
-                <hr/>
                 <div>
-                    <input type="input" class="deskInput" placeholder="Name of new task" id="ol1_input"/>
-                    <input type="button" class="deskButton" onClick={this.taskStateHandler} value="Add new task"/>
+                    <input type="input" class="deskInput" placeholder="Name of new task"
+                           id={"ol" + this.props.deskOrder + "_input"}/>
+                    <input type="button" class="deskButton" onClick={this.increaseTaskNumber} value="Add new task"/>
                 </div>
             </div>
         )
