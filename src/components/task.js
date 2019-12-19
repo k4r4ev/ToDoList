@@ -4,11 +4,11 @@ class Task extends React.Component {
     render() {
         return (
             <span>
-                <li id={"d" + this.props.deskOrder + "t" + this.props.taskOrder}>{"#" + this.props.taskOrder + " " + this.props.name}</li>
-                <span id="span1">
+                <li>{this.props.name}</li>
+                <span>
                     <a>change</a>
                     <a>complete</a>
-                    <a onClick={this.props.reduceTaskNumber}>delete</a>
+                    <a onClick={() => this.props.deleteTask(this.props.deskOrder, this.props.name)}>delete</a>
                 </span>
             </span>
         )

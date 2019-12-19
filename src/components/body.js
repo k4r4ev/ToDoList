@@ -1,55 +1,56 @@
 import React from "react";
 import Desk from "./desk";
-import Data from "../data";
 
 class Body extends React.Component {
     constructor(props) {
         super(props);
-        this.storage = new Data();
-        this.state = {
-            deskNumber: this.storage.storage.desks.length
-        };
-        console.log(this.storage);
     }
 
     createDesk = () => {
-        this.setState({
-            deskNumber: this.state.deskNumber + 1,
-        });
-        this.storage.createDesk();
+        this.props.storage.createDesk();
+        this.props.update();
     };
 
-    reduceDeskNumber = () => {
-        this.setState({
-            deskNumber: this.state.deskNumber - 1,
-        });
+    deleteDesk = (deskOrder) => {
+        this.props.storage.deleteDesk(deskOrder);
+        this.props.update();
+    };
+
+    createTask = (deskOrder) => {
+        this.props.storage.createTask(deskOrder);
+        this.props.update();
+    };
+
+    deleteTask = (deskOrder, taskName) => {
+        this.props.storage.deleteTask(deskOrder, taskName);
+        this.props.update();
     };
 
     deleteAll = () => {
-        document.getElementById("container").innerHTML = "";
-        this.storage.deleteAll();
+        this.props.storage.deleteAll();
+        this.props.update();
     };
 
     render() {
         return (
             <div>
-                <div className="panel" id="panel">
+                <div className="panel">
                     <div className="logo">ToDoList</div>
                     <div>
-                        <input type="input" id="deskName" class="panelInput" placeholder="The name of the desk"/>
-                        <input type="button" id="createDesk" class="panelButton1" onClick={this.createDesk}
-                               value="Add new desk"/>
-                        <input type="button" id="clear" class="panelButton2" onClick={this.deleteAll}
-                               value="Delete all desk"/>
+                        <input type="input" className="panelInput" placeholder="The name of the desk"/>
+                        <input type="button" className="panelButton1" onClick={this.createDesk} value="Add new desk"/>
+                        <input type="button" className="panelButton2" onClick={this.deleteAll} value="Delete all desk"/>
                     </div>
                 </div>
-                <div className="container" id="container">
-                    {this.storage.storage.desks.map((currentElement, index) => <Desk
-                        name={this.storage.storage.desks[index].name}
-                        tasks={this.storage.storage.desks[index].tasks}
-                        reduceDeskNumber={this.reduceDeskNumber}
-                        deskOrder={index + 1}
-                        storage={this.storage}/>)}
+                <div className="container">
+                    {this.props.storage.storage.desks.map((currentDesk, index) => <Desk
+                        name={currentDesk.name}
+                        tasks={this.props.storage.storage.desks[index].tasks}
+                        order={this.props.storage.storage.desks[index].order}
+                        createTask={this.createTask}
+                        deleteTask={this.deleteTask}
+                        deleteDesk={this.deleteDesk}
+                        storage={this.props.storage}/>)}
                 </div>
             </div>
         )

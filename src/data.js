@@ -1,13 +1,14 @@
 class Data {
     constructor() {
         this.storage = {};
-        this.deskNumber = 0;
         this.createDesk = this.createDesk.bind(this);
         if (localStorage.length === 0) {
+            this.maxDeskOrder = 0;
             this.storage.desks = [];
             this.createDesk();
         } else {
             this.storage = JSON.parse(localStorage.getItem('storage'));
+            this.maxDeskOrder = this.storage.desks.length;
         }
     }
 
@@ -18,19 +19,19 @@ class Data {
 
     deleteAll = () => {
         this.storage = {};
-        this.deskNumber = 0;
+        this.maxDeskOrder = 0;
         this.storage.desks = [];
         this.createDesk();
         this.saveToLocalStorage();
     };
 
     createDesk = (name = "Desk", tasks = [{name: "Task #1", completed: false}]) => {
-        this.storage.desks.push({name: name, tasks: [], order: this.deskNumber});
+        this.storage.desks.push({name: name, order: this.maxDeskOrder, tasks: []});
         for (let i in tasks) {
-            this.createTask(this.deskNumber, tasks[i]);
+            this.createTask(this.maxDeskOrder, tasks[i]);
         }
         this.saveToLocalStorage();
-        this.deskNumber++;
+        this.maxDeskOrder++;
     };
 
     deleteDesk = (deskOrder) => {
@@ -40,11 +41,14 @@ class Data {
                 this.saveToLocalStorage();
             }
         }
-        this.deskNumber--;
     };
 
-    createTask = (deskOrder, taskName = "task") => {
-        this.storage.desks[deskOrder].tasks.push(taskName);
+    createTask = (deskOrder, taskObj = {name: "Task #1", completed: false}) => {
+        for (let i = 0; i < this.storage.desks.length; i++) {
+            if (this.storage.desks[i].order === deskOrder) {
+                this.storage.desks[i].tasks.push(taskObj);
+            }
+        }
         this.saveToLocalStorage();
     };
 
@@ -52,9 +56,10 @@ class Data {
         for (let i = 0; i < this.storage.desks.length; i++) {
             if (this.storage.desks[i].order === deskOrder) {
                 for (let j = 0; j < this.storage.desks[i].tasks.length; j++) {
-                    if (this.storage.desks[i].tasks.name === taskName) {
+                    if (this.storage.desks[i].tasks[j].name === taskName) {
                         this.storage.desks[i].tasks.splice(j, 1);
                         this.saveToLocalStorage();
+                        break;
                     }
                 }
             }

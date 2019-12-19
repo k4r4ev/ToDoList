@@ -173,6 +173,11 @@ hr {
     border-radius: 20px;
 }
 
+.circleButton :hover {
+    height:25px;
+    width: 25px;
+}
+
 .green {
     background-color: darkgreen;
 }
