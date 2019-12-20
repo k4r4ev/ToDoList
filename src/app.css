@@ -3,7 +3,7 @@
 
 body {
     margin: 0;
-    background-color: darkolivegreen;
+    background-color: rgb(72, 92, 37);
     font-family: Roboto, serif;
 }
 
@@ -17,8 +17,8 @@ h2 {
 
 hr {
     border: none;
-    color: brown;
-    background-color: brown;
+    color: rgb(134, 45, 45);
+    background-color: rgb(134, 45, 45);
     height: 4px;
 }
 
@@ -42,14 +42,14 @@ hr {
     font-weight: bolder;
     font-size: 30px;
     text-align: center;
-    color: darkolivegreen;
+    color: rgb(149, 155, 139);
     margin-left: 20px;
 }
 
 .panel {
     width: 100%;
     height: 50px;
-    background-color: brown;
+    background-color: rgb(134, 45, 45);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -95,13 +95,12 @@ hr {
 
 .desk {
     width: 400px;
-    border: 4px solid brown;
+    border: 6px solid rgb(134, 45, 45);
     border-radius: 10px;
     margin: 20px;
 }
 
 .desk a {
-    background-color: darkolivegreen;
     font-size: 15px;
     border: none;
     height: 30px;
@@ -119,12 +118,12 @@ hr {
 }
 
 .deskInput {
-    background-color: brown;
+    background-color: rgb(134, 45, 45);
     border: none;
     height: 30px;
     width: 170px;
     border-radius: 10px 0 0 10px;
-    border-right: rgb(197, 48, 48) solid 1px;
+    border-right: rgb(134, 45, 45) solid 1px;
     color: lightsteelblue;
     outline: none;
     text-align: center;
@@ -132,7 +131,7 @@ hr {
 }
 
 .deskButton {
-    background-color: brown;
+    background-color: rgb(134, 45, 45);
     border: none;
     height: 32px;
     width: 100px;
@@ -153,7 +152,7 @@ hr {
     outline: none;
 }
 
-.complete {
+.completed {
     text-decoration: line-through;
 }
 

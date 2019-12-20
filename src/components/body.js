@@ -21,8 +21,13 @@ class Body extends React.Component {
         this.props.update();
     };
 
-    deleteTask = (deskOrder, taskName) => {
-        this.props.storage.deleteTask(deskOrder, taskName);
+    completeTask = (deskOrder, taskOrder) => {
+        this.props.storage.completeTask(deskOrder, taskOrder);
+        this.props.update();
+    };
+
+    deleteTask = (deskOrder, taskOrder) => {
+        this.props.storage.deleteTask(deskOrder, taskOrder);
         this.props.update();
     };
 
@@ -43,14 +48,14 @@ class Body extends React.Component {
                     </div>
                 </div>
                 <div className="container">
-                    {this.props.storage.storage.desks.map((currentDesk, index) => <Desk
+                    {this.props.storage.storage.desks.map((currentDesk) => <Desk
                         name={currentDesk.name}
-                        tasks={this.props.storage.storage.desks[index].tasks}
-                        order={this.props.storage.storage.desks[index].order}
+                        tasks={currentDesk.tasks}
+                        deskOrder={currentDesk.order}
                         createTask={this.createTask}
                         deleteTask={this.deleteTask}
                         deleteDesk={this.deleteDesk}
-                        storage={this.props.storage}/>)}
+                        completeTask={this.completeTask}/>)}
                 </div>
             </div>
         )
