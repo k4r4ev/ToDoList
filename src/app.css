@@ -118,12 +118,12 @@ hr {
 }
 
 .deskInput {
-    background-color: rgb(134, 45, 45);
+    background-color: rgb(134, 47, 47);
     border: none;
     height: 30px;
     width: 170px;
     border-radius: 10px 0 0 10px;
-    border-right: rgb(134, 45, 45) solid 1px;
+    border-right: brown solid 1px;
     color: lightsteelblue;
     outline: none;
     text-align: center;
@@ -173,8 +173,11 @@ hr {
 }
 
 .circleButton :hover {
+    margin-top: -22px !important;
+    margin-left: 78px !important;
     height:25px;
     width: 25px;
+    z-index: 100;
 }
 
 .green {

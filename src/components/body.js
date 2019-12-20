@@ -2,10 +2,6 @@ import React from "react";
 import Desk from "./desk";
 
 class Body extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     createDesk = () => {
         this.props.storage.createDesk();
         this.props.update();

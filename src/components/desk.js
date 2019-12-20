@@ -2,16 +2,12 @@ import React from "react";
 import Task from "./task";
 
 class Desk extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="desk" draggable="true">
                 <div className="title">
                     <h2>{"#" + (this.props.deskOrder + 1) + " " + this.props.name}</h2>
-                    <a onClick={() => this.props.deleteDesk(this.props.order)}>delete</a>
+                    <a onClick={() => this.props.deleteDesk(this.props.deskOrder)}>delete</a>
                     <a className="circleButton">
                         <div className="circle blue"/>
                     </a>
