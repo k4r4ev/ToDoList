@@ -4,35 +4,21 @@ import Desk from "./desk";
 class Body extends React.Component {
     createDesk = () => {
         this.props.storage.createDesk();
-        this.props.update();
+        this.props.bodyUpdate();
     };
 
     deleteDesk = (deskOrder) => {
         this.props.storage.deleteDesk(deskOrder);
-        this.props.update();
-    };
-
-    createTask = (deskOrder) => {
-        this.props.storage.createTask(deskOrder);
-        this.props.update();
-    };
-
-    completeTask = (deskOrder, taskOrder) => {
-        this.props.storage.completeTask(deskOrder, taskOrder);
-        this.props.update();
-    };
-
-    deleteTask = (deskOrder, taskOrder) => {
-        this.props.storage.deleteTask(deskOrder, taskOrder);
-        this.props.update();
+        this.props.bodyUpdate();
     };
 
     deleteAll = () => {
         this.props.storage.deleteAll();
-        this.props.update();
+        this.props.bodyUpdate();
     };
 
     render() {
+        alert("bodyUpdate");
         return (
             <div>
                 <div className="panel">
@@ -48,10 +34,9 @@ class Body extends React.Component {
                         name={currentDesk.name}
                         tasks={currentDesk.tasks}
                         deskOrder={currentDesk.order}
-                        createTask={this.createTask}
-                        deleteTask={this.deleteTask}
                         deleteDesk={this.deleteDesk}
-                        completeTask={this.completeTask}/>)}
+                        deskUpdate={() => this.forceUpdate()}
+                        storage={this.props.storage}/>)}
                 </div>
             </div>
         )

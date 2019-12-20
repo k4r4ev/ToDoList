@@ -16,7 +16,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Body storage={this.storage} update={() => this.forceUpdate()}/>
+                <Body storage={this.storage} bodyUpdate={() => this.forceUpdate()}/>
             </div>
         )
     }

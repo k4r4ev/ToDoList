@@ -2,7 +2,23 @@ import React from "react";
 import Task from "./task";
 
 class Desk extends React.Component {
+    createTask = (deskOrder) => {
+        this.props.storage.createTask(deskOrder);
+        this.props.deskUpdate();
+    };
+
+    completeTask = (deskOrder, taskOrder) => {
+        this.props.storage.completeTask(deskOrder, taskOrder);
+        this.props.deskUpdate();
+    };
+
+    deleteTask = (deskOrder, taskOrder) => {
+        this.props.storage.deleteTask(deskOrder, taskOrder);
+        this.props.deskUpdate();
+    };
+
     render() {
+        alert("deskUpdate #" + (this.props.deskOrder + 1));
         return (
             <div className="desk" draggable="true">
                 <div className="title">
@@ -24,13 +40,13 @@ class Desk extends React.Component {
                                                                  taskOrder={currentTask.order}
                                                                  completed={currentTask.completed}
                                                                  deskOrder={this.props.deskOrder}
-                                                                 completeTask={this.props.completeTask}
-                                                                 deleteTask={this.props.deleteTask}/>)}
+                                                                 completeTask={this.completeTask}
+                                                                 deleteTask={this.deleteTask}/>)}
                 </ol>
                 <div>
                     <input type="input" className="deskInput" placeholder="Name of new task"/>
                     <input type="button" className="deskButton" value="Add new task"
-                           onClick={() => this.props.createTask(this.props.deskOrder)}/>
+                           onClick={() => this.createTask(this.props.deskOrder)}/>
                 </div>
             </div>
         )
