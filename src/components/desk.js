@@ -1,38 +1,36 @@
-import React from "react";
-import Task from "./task";
+import React from 'react';
+import Task from './task';
 
 class Desk extends React.Component {
-    createTask = (deskOrder) => {
-        this.props.storage.createTask(deskOrder);
-        this.props.deskUpdate();
+    constructor(props) {
+        super(props);
+        this.state = {taskText: ""};
+    }
+
+    handleChangeTaskText = (event) => {
+        this.setState({taskText: event.target.value})
     };
 
-    completeTask = (deskOrder, taskOrder) => {
-        this.props.storage.completeTask(deskOrder, taskOrder);
-        this.props.deskUpdate();
-    };
-
-    deleteTask = (deskOrder, taskOrder) => {
-        this.props.storage.deleteTask(deskOrder, taskOrder);
-        this.props.deskUpdate();
+    changeTask = (taskOrder, taskName) => {
+        this.setState({taskText: taskName});
+        this.props.storageUpdate("deleteTask", taskOrder);
     };
 
     render() {
-        alert("deskUpdate #" + (this.props.deskOrder + 1));
         return (
             <div className="desk" draggable="true">
+                <a className="circleButton">
+                    <div className="circle green"/>
+                </a>
+                <a className="circleButton">
+                    <div className="circle red"/>
+                </a>
+                <a className="circleButton">
+                    <div className="circle blue"/>
+                </a>
                 <div className="title">
                     <h2>{"#" + (this.props.deskOrder + 1) + " " + this.props.name}</h2>
-                    <a onClick={() => this.props.deleteDesk(this.props.deskOrder)}>delete</a>
-                    <a className="circleButton">
-                        <div className="circle blue"/>
-                    </a>
-                    <a className="circleButton">
-                        <div className="circle red"/>
-                    </a>
-                    <a className="circleButton">
-                        <div className="circle green"/>
-                    </a>
+                    <a onClick={() => this.props.storageUpdate("deleteDesk", this.props.deskOrder)}>delete</a>
                 </div>
                 <hr/>
                 <ol className="list">
@@ -40,13 +38,17 @@ class Desk extends React.Component {
                                                                  taskOrder={currentTask.order}
                                                                  completed={currentTask.completed}
                                                                  deskOrder={this.props.deskOrder}
-                                                                 completeTask={this.completeTask}
-                                                                 deleteTask={this.deleteTask}/>)}
+                                                                 storageUpdate={this.props.storageUpdate}
+                                                                 changeTask={this.changeTask}/>)}
                 </ol>
                 <div>
-                    <input type="input" className="deskInput" placeholder="Name of new task"/>
+                    <input type="input" className="deskInput" placeholder="Name of new task"
+                           onChange={this.handleChangeTaskText} value={this.state.taskText}/>
                     <input type="button" className="deskButton" value="Add new task"
-                           onClick={() => this.createTask(this.props.deskOrder)}/>
+                           onClick={() => {this.props.storageUpdate("createTask", {
+                               deskOrder: this.props.deskOrder,
+                               taskObj: {name: this.state.taskText, completed: false}
+                           }); this.setState({taskText: ""});}}/>
                 </div>
             </div>
         )

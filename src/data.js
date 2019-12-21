@@ -23,16 +23,14 @@ class Data {
         this.storage.desks = [];
         this.createDesk();
         this.saveToLocalStorage();
+        return this.storage;
     };
 
-    createDesk = (name = "Desk", tasks = [{name: "task", completed: false}]) => {
+    createDesk = (name = "Desk") => {
         this.storage.desks.push({name: name, order: this.storage.maxDeskOrder, tasks: []});
-        for (let i in tasks) {
-            tasks[i].order = this.storage.maxTaskOrder;
-            this.createTask(this.storage.maxDeskOrder, tasks[i]);
-        }
         this.storage.maxDeskOrder++;
         this.saveToLocalStorage();
+        return this.storage;
     };
 
     deleteDesk = (deskOrder) => {
@@ -42,9 +40,10 @@ class Data {
                 this.saveToLocalStorage();
             }
         }
+        return this.storage;
     };
 
-    createTask = (deskOrder, taskObj = {name: "task", completed: false}) => {
+    createTask = ({deskOrder, taskObj = {name: "task", completed: false}}) => {
         for (let i = 0; i < this.storage.desks.length; i++) {
             if (this.storage.desks[i].order === deskOrder) {
                 taskObj.order = this.storage.maxTaskOrder;
@@ -53,34 +52,33 @@ class Data {
             }
         }
         this.saveToLocalStorage();
+        return this.storage;
     };
 
-    completeTask = (deskOrder, taskOrder) => {
+    completeTask = (taskOrder) => {
         for (let i = 0; i < this.storage.desks.length; i++) {
-            if (this.storage.desks[i].order === deskOrder) {
-                for (let j = 0; j < this.storage.desks[i].tasks.length; j++) {
-                    if (this.storage.desks[i].tasks[j].order === taskOrder) {
-                        this.storage.desks[i].tasks[j].completed = true;
-                        this.saveToLocalStorage();
-                        break;
-                    }
+            for (let j = 0; j < this.storage.desks[i].tasks.length; j++) {
+                if (this.storage.desks[i].tasks[j].order === taskOrder) {
+                    this.storage.desks[i].tasks[j].completed = true;
+                    this.saveToLocalStorage();
+                    break;
                 }
             }
         }
+        return this.storage;
     };
 
-    deleteTask = (deskOrder, taskOrder) => {
+    deleteTask = (taskOrder) => {
         for (let i = 0; i < this.storage.desks.length; i++) {
-            if (this.storage.desks[i].order === deskOrder) {
-                for (let j = 0; j < this.storage.desks[i].tasks.length; j++) {
-                    if (this.storage.desks[i].tasks[j].order === taskOrder) {
-                        this.storage.desks[i].tasks.splice(j, 1);
-                        this.saveToLocalStorage();
-                        break;
-                    }
+            for (let j = 0; j < this.storage.desks[i].tasks.length; j++) {
+                if (this.storage.desks[i].tasks[j].order === taskOrder) {
+                    this.storage.desks[i].tasks.splice(j, 1);
+                    this.saveToLocalStorage();
+                    break;
                 }
             }
         }
+        return this.storage;
     };
 }
 
