@@ -6,6 +6,11 @@ import store from './store/store';
 import './app.css';
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {store};
+    }
+
     render() {
         return (
             <Provider store={store}>

@@ -1,10 +1,3 @@
-/*
-import {createStore} from 'redux';
-import {rootReducer, initialState} from '../store/store';
-
-const store = createStore(rootReducer, initialState);
-export default store;
-*/
 export const initialState = (localStorage.length === 0) ? {
     desks: [{name: "desk", order: 0, tasks: [{name: "task", completed: false, order: 0}]}],
     maxDeskOrder: 1,

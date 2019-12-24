@@ -26,7 +26,15 @@ class Body extends React.Component {
                         <input type="input" className="deskNameInput" placeholder="The name of the desk"
                                onChange={this.handleChangeDeskText}/>
                         <input type="button" className="deskAddingButton" value="Add new desk"
-                               onClick={() => this.createDesk(this.state.deskText)}/>
+                               onClick={() => {
+                                   this.props.desks.push({
+                                       name: this.state.deskText,
+                                       order: 5,
+                                       completed: false,
+                                       tasks: []
+                                   });
+                                   this.createDesk(this.props.desks);
+                               }}/>
                         <input type="button" className="deskRemoveButton" value="Delete all desk"
                             /*onClick={() => this.props.storageUpdate("deleteAll")}*//>
                     </div>
