@@ -29,7 +29,7 @@ class Desk extends React.Component {
                     <div className="circle blue"/>
                 </a>
                 <div className="title">
-                    <h2>{"#" + (this.props.deskOrder + 1) + " " + this.props.name}</h2>
+                    <h2>{this.props.name}</h2>
                     <a /*onClick={() => this.props.storageUpdate("deleteDesk", this.props.deskOrder)}*/>delete</a>
                 </div>
                 <hr/>

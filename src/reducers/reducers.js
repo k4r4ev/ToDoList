@@ -7,7 +7,11 @@ export const initialState = (localStorage.length === 0) ? {
 export function rootReducer(state = initialState, action) {
     switch (action.type) {
         case 'CREATE_DESK':
-            return {...state, desks: action.payload};
+            return {
+                ...state, desks: [...state.desks, action.desk]
+            };
+        case 'CREATE_TASK':
+            return {};
         default:
             return state
     }

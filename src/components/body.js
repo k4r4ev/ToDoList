@@ -7,6 +7,7 @@ class Body extends React.Component {
     constructor(props) {
         super(props);
         this.state = {deskText: ""};
+        this.maxDeskOrder = this.props.maxDeskOrder;
     }
 
     handleChangeDeskText = (event) => {
@@ -14,7 +15,8 @@ class Body extends React.Component {
     };
 
     createDesk = (desk) => {
-        this.props.createDesk(desk)
+        this.props.createDesk(desk);
+        this.maxDeskOrder++;
     };
 
     render() {
@@ -24,17 +26,13 @@ class Body extends React.Component {
                     <div className="logo">ToDoList</div>
                     <div>
                         <input type="input" className="deskNameInput" placeholder="The name of the desk"
-                               onChange={this.handleChangeDeskText}/>
+                               onChange={this.handleChangeDeskText} value={this.state.deskText}/>
                         <input type="button" className="deskAddingButton" value="Add new desk"
-                               onClick={() => {
-                                   this.props.desks.push({
-                                       name: this.state.deskText,
-                                       order: 5,
-                                       completed: false,
-                                       tasks: []
-                                   });
-                                   this.createDesk(this.props.desks);
-                               }}/>
+                               onClick={() => {this.createDesk({
+                                   name: this.state.deskText,
+                                   order: this.maxDeskOrder,
+                                   tasks: []
+                               }); this.setState({deskText: ""})}}/>
                         <input type="button" className="deskRemoveButton" value="Delete all desk"
                             /*onClick={() => this.props.storageUpdate("deleteAll")}*//>
                     </div>
@@ -62,7 +60,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Body)
+export default connect(mapStateToProps, mapDispatchToProps)(Body)

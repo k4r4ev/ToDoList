@@ -8,7 +8,11 @@ import './app.css';
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {store};
+        this.state = {store};/*
+        localStorage.removeItem('storage');
+        let storage = {};
+        storage.desks = this.state.desks;
+        localStorage.setItem('storage', JSON.stringify(storage));*/
     }
 
     render() {
