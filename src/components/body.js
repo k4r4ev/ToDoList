@@ -1,6 +1,7 @@
 import React from 'react';
 import Desk from './desk';
 import {connect} from 'react-redux'
+import {createDesk} from '../actions/actions'
 
 class Body extends React.Component {
     constructor(props) {
@@ -12,6 +13,10 @@ class Body extends React.Component {
         this.setState({deskText: event.target.value})
     };
 
+    createDesk = (desk) => {
+        this.props.createDesk(desk)
+    };
+
     render() {
         return (
             <div>
@@ -21,17 +26,16 @@ class Body extends React.Component {
                         <input type="input" className="deskNameInput" placeholder="The name of the desk"
                                onChange={this.handleChangeDeskText}/>
                         <input type="button" className="deskAddingButton" value="Add new desk"
-                               onClick={() => this.props.storageUpdate("createDesk", this.state.deskText)}/>
+                               onClick={() => this.createDesk(this.state.deskText)}/>
                         <input type="button" className="deskRemoveButton" value="Delete all desk"
-                               onClick={() => this.props.storageUpdate("deleteAll")}/>
+                            /*onClick={() => this.props.storageUpdate("deleteAll")}*//>
                     </div>
                 </div>
                 <div className="container">
-                    {this.props.storage.desks.map((currentDesk) => <Desk
+                    {this.props.desks.map((currentDesk) => <Desk
                         name={currentDesk.name}
                         tasks={currentDesk.tasks}
-                        deskOrder={currentDesk.order}
-                        storageUpdate={this.props.storageUpdate}/>)}
+                        deskOrder={currentDesk.order}/>)}
                 </div>
             </div>
         )
@@ -40,8 +44,17 @@ class Body extends React.Component {
 
 const mapStateToProps = store => {
     return {
-        user: store.user,
+        desks: store.desks
     }
 };
 
-export default connect(mapStateToProps)(Body);
+const mapDispatchToProps = dispatch => {
+    return {
+        createDesk: desk => dispatch(createDesk(desk)),
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Body)

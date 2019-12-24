@@ -8,9 +8,9 @@ class Task extends React.Component {
         if (this.props.completed === true) {
             liClass = "completed";
         } else {
-            changeTask = <a onClick={() => this.props.changeTask(this.props.taskOrder, this.props.name)}>change</a>;
+            changeTask = <a /*onClick={() => this.props.changeTask(this.props.taskOrder, this.props.name)}*/>change</a>;
             completeTask =
-                <a onClick={() => this.props.storageUpdate("completeTask", this.props.taskOrder)}>complete</a>
+                <a /*onClick={() => this.props.storageUpdate("completeTask", this.props.taskOrder)}*/>complete</a>
         }
         return (
             <span>
@@ -18,7 +18,7 @@ class Task extends React.Component {
                 <span>
                     {changeTask}
                     {completeTask}
-                    <a onClick={() => this.props.storageUpdate("deleteTask", this.props.taskOrder)}>delete</a>
+                    <a /*onClick={() => this.props.storageUpdate("deleteTask", this.props.taskOrder)}*/>delete</a>
                 </span>
             </span>
         )
