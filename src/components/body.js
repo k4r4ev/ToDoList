@@ -1,5 +1,6 @@
 import React from 'react';
 import Desk from './desk';
+import {connect} from 'react-redux'
 
 class Body extends React.Component {
     constructor(props) {
@@ -37,4 +38,10 @@ class Body extends React.Component {
     }
 }
 
-export default Body;
+const mapStateToProps = store => {
+    return {
+        user: store.user,
+    }
+};
+
+export default connect(mapStateToProps)(Body);
