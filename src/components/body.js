@@ -1,7 +1,7 @@
 import React from 'react';
 import Desk from './desk';
-import {connect} from 'react-redux'
-import {createDesk} from '../actions/actions'
+import {connect} from 'react-redux';
+import {createDesk, deleteAll} from '../actions/actions';
 
 class Body extends React.Component {
     constructor(props) {
@@ -10,13 +10,8 @@ class Body extends React.Component {
         this.maxDeskOrder = this.props.maxDeskOrder;
     }
 
-    handleChangeDeskText = (event) => {
+    handleChangeDeskNameText = (event) => {
         this.setState({deskText: event.target.value})
-    };
-
-    createDesk = (desk) => {
-        this.props.createDesk(desk);
-        this.maxDeskOrder++;
     };
 
     render() {
@@ -26,15 +21,18 @@ class Body extends React.Component {
                     <div className="logo">ToDoList</div>
                     <div>
                         <input type="input" className="deskNameInput" placeholder="The name of the desk"
-                               onChange={this.handleChangeDeskText} value={this.state.deskText}/>
+                               onChange={this.handleChangeDeskNameText} value={this.state.deskText}/>
                         <input type="button" className="deskAddingButton" value="Add new desk"
-                               onClick={() => {this.createDesk({
-                                   name: this.state.deskText,
-                                   order: this.maxDeskOrder,
-                                   tasks: []
-                               }); this.setState({deskText: ""})}}/>
+                               onClick={() => {
+                                   this.props.createDesk({
+                                       name: this.state.deskText,
+                                       order: this.maxDeskOrder,
+                                       tasks: []
+                                   });
+                                   this.setState({deskText: ""})
+                               }}/>
                         <input type="button" className="deskRemoveButton" value="Delete all desk"
-                            /*onClick={() => this.props.storageUpdate("deleteAll")}*//>
+                               onClick={() => this.props.deleteAll()}/>
                     </div>
                 </div>
                 <div className="container">
@@ -49,6 +47,8 @@ class Body extends React.Component {
 }
 
 const mapStateToProps = store => {
+    localStorage.removeItem('storage');
+    localStorage.setItem('storage', JSON.stringify(store));
     return {
         desks: store.desks
     }
@@ -57,6 +57,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
     return {
         createDesk: desk => dispatch(createDesk(desk)),
+        deleteAll: () => dispatch(deleteAll()),
     }
 };
 

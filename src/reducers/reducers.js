@@ -10,8 +10,10 @@ export function rootReducer(state = initialState, action) {
             return {
                 ...state, desks: [...state.desks, action.desk]
             };
-        case 'CREATE_TASK':
-            return {};
+        case 'DELETE_ALL':
+            return {
+                ...state, desks: [{name: "desk", order: 0, tasks: [{name: "task", completed: false, order: 0}]}]
+            };
         default:
             return state
     }
