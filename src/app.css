@@ -78,6 +78,7 @@ hr {
     text-align: center;
     margin-right: 0;
     padding: 0 10px;
+    cursor: pointer;
 }
 
 .deskRemoveButton {
@@ -91,6 +92,7 @@ hr {
     text-align: center;
     margin-right: 30px;
     padding: 0 10px;
+    cursor: pointer;
 }
 
 .desk {
@@ -140,6 +142,7 @@ hr {
     outline: none;
     text-align: center;
     padding: 0 10px;
+    cursor: pointer;
 }
 
 .desk ol {
@@ -165,7 +168,7 @@ hr {
 
 .circle {
     position: absolute;
-    height:20px;
+    height: 20px;
     width: 20px;
     border-radius: 20px;
     border: rgb(106, 92, 112) solid 1px;
@@ -184,4 +187,56 @@ hr {
 .blue {
     background-color: darkblue;
     margin-left: 366px !important;
+}
+
+.modal {
+    width: 250px;
+    height: 100px;
+    border-radius: 10px;
+    background-color: darkolivegreen;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal input {
+    font-size: 20px;
+    width: 60px;
+    height: 30px;
+    border: #f3f6ff solid 1px;
+    text-align: center;
+    color: #f3f6ff;
+    border-radius: 10px;
+    background-color: darkolivegreen;
+    outline: none;
+    cursor: pointer;
+}
+
+.modal p {
+    font-size: 13px;
+    color: #f3f6ff;
+}
+
+.modal div {
+    width: 200px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
 }
