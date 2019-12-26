@@ -1,11 +1,13 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import '../app.css';
+import {Link as RouterLink} from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/ListItem';
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {nickname: "", password: "", link: ""};
+        this.state = {nickname: "", password: ""};
     }
 
     handleChangeNickname = (event) => {
@@ -26,9 +28,11 @@ class Login extends React.Component {
         return (
             <div className="login">
                 <p>Authorization</p>
-                <input type="input" onChange={this.handleChangeNickname} placeholder="nickname"/>
-                <input type="input" onChange={this.handleChangePassword} placeholder="password"/>
-                <Link className="login_link" to={this.getLink}>Enter</Link>
+                <TextField label="nickname" onChange={this.handleChangeNickname} variant="outlined" size="small"/>
+                <TextField label="password" onChange={this.handleChangePassword} variant="outlined" size="small"/>
+                <Typography align="center">
+                    <Link to={this.getLink} button component={RouterLink}>Enter</Link>
+                </Typography>
             </div>
         )
     }

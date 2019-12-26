@@ -2,8 +2,12 @@ import React from 'react';
 import Desk from './desk';
 import {connect} from 'react-redux';
 import {createDesk, deleteAll} from '../actions/actions';
-import Modal from "./modal";
-import Overlay from "./overlay";
+import Modal from './modal';
+import Overlay from './overlay';
+import TextField from '@material-ui/core/TextField';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
+import IconButton from '@material-ui/core/IconButton';
 
 class Body extends React.Component {
     constructor(props) {
@@ -13,17 +17,17 @@ class Body extends React.Component {
 
     setDeskOrder = (desks = this.props.desks) => {
         let maxDeskOrder = 0;
-        for (let i in desks) {
-            if (desks[i].order > maxDeskOrder)
-                maxDeskOrder = desks[i].order;
+        for (let deskItem = 0; deskItem < desks.length; deskItem++) {
+            if (desks[deskItem].order > maxDeskOrder)
+                maxDeskOrder = desks[deskItem].order;
         }
         return ++maxDeskOrder;
     };
 
     setTaskOrder = (desks = this.props.desks) => {
         let maxTaskOrder = 0;
-        for (let deskItem in desks) {
-            for (let taskItem in desks[deskItem].tasks) {
+        for (let deskItem = 0; deskItem < desks.length; deskItem++) {
+            for (let taskItem = 0; taskItem < desks[deskItem].tasks.length; taskItem++) {
                 if (desks[deskItem].tasks[taskItem].order > maxTaskOrder) {
                     maxTaskOrder = desks[deskItem].tasks[taskItem].order;
                 }
@@ -52,25 +56,27 @@ class Body extends React.Component {
                 {this.state.modalWindow}
                 <div className="panel">
                     <div className="logo">ToDoList</div>
-                    <div>
-                        <input type="input" className="deskNameInput" placeholder="The name of the desk"
-                               onChange={this.handleChangeDeskNameText} value={this.state.deskText}/>
-                        <input type="button" className="deskAddingButton" value="Add new desk"
-                               onClick={() => {
-                                   this.props.createDesk({
-                                       name: this.state.deskText,
-                                       order: this.setDeskOrder(),
-                                       tasks: []
-                                   });
-                                   this.setState({deskText: ""})
-                               }}/>
-                        <input type="button" className="deskRemoveButton" value="Delete all desk"
-                               onClick={() => {//this.props.deleteAll();
-                                   this.setState({
-                                       modalWindow: <div><Modal deleteAllDesks={this.deleteAllDesks}
-                                                                hideModal={this.hideModal}/><Overlay/></div>
-                                   })
-                               }}/>
+                    <div className="header">
+                        <TextField label="name of desk" variant="outlined" size="small"
+                                   onChange={this.handleChangeDeskNameText} value={this.state.deskText}/>
+                        <IconButton aria-label="add" onClick={() => {
+                            this.props.createDesk({
+                                name: this.state.deskText,
+                                order: this.setDeskOrder(),
+                                tasks: []
+                            });
+                            this.setState({deskText: ""})
+                        }}>
+                            <AddIcon fontSize="large"/>
+                        </IconButton>
+                        <IconButton aria-label="delete" onClick={() => {//this.props.deleteAll();
+                            this.setState({
+                                modalWindow: <div><Modal deleteAllDesks={this.deleteAllDesks}
+                                                         hideModal={this.hideModal}/><Overlay/></div>
+                            })
+                        }}>
+                            <DeleteIcon fontSize="large"/>
+                        </IconButton>
                     </div>
                 </div>
                 <div className="container">
@@ -86,8 +92,8 @@ class Body extends React.Component {
 }
 
 const mapStateToProps = store => {
-    localStorage.removeItem('storage');
-    localStorage.setItem('storage', JSON.stringify(store));
+    localStorage.removeItem("storage");
+    localStorage.setItem("storage", JSON.stringify(store));
     return {
         desks: store.desks
     }

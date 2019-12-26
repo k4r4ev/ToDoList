@@ -1,7 +1,13 @@
 import React from 'react';
 import Task from './task';
-import {createTask, deleteTask, deleteDesk} from "../actions/actions";
-import {connect} from "react-redux";
+import {createTask, deleteTask, deleteDesk} from '../actions/actions';
+import {connect} from 'react-redux';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SendIcon from '@material-ui/icons/Send';
+import AlarmIcon from '@material-ui/icons/Alarm';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 class Desk extends React.Component {
     constructor(props) {
@@ -21,18 +27,10 @@ class Desk extends React.Component {
     render() {
         return (
             <div className="desk" draggable="true">
-                <a className="circleButton">
-                    <div className="circle green"/>
-                </a>
-                <a className="circleButton">
-                    <div className="circle red"/>
-                </a>
-                <a className="circleButton">
-                    <div className="circle blue"/>
-                </a>
                 <div className="title">
                     <h2>{this.props.name}</h2>
-                    <a onClick={() => this.props.deleteDesk(this.props.deskOrder)}>delete</a>
+                    <IconButton onClick={() => this.props.deleteDesk(this.props.deskOrder)} aria-label="delete">
+                        <DeleteIcon fontSize="small"/></IconButton>
                 </div>
                 <hr/>
                 <ol className="list">
@@ -43,20 +41,27 @@ class Desk extends React.Component {
                                                                  changeTask={this.changeTask}/>)}
                 </ol>
                 <div>
-                    <input type="input" className="deskInput" placeholder="Name of new task"
-                           onChange={this.handleChangeTaskText} value={this.state.taskText}/>
-                    <input type="button" className="deskButton" value="Add new task"
-                           onClick={() => {
-                               this.props.createTask({
-                                   deskOrder: this.props.deskOrder,
-                                   taskObj: {
-                                       name: this.state.taskText,
-                                       order: this.props.setTaskOrder(),
-                                       completed: false
-                                   }
-                               });
-                               this.setState({taskText: ""});
-                           }}/>
+
+                    <TextField label="add new task" variant="standard" size="small"
+                               InputProps={{
+                                   startAdornment: (
+                                       <InputAdornment position="start">
+                                           <AlarmIcon/>
+                                       </InputAdornment>
+                                   ),
+                               }}
+                               onChange={this.handleChangeTaskText} value={this.state.taskText}/>
+                    <IconButton aria-label="send" onClick={() => {
+                        this.props.createTask({
+                            deskOrder: this.props.deskOrder,
+                            taskObj: {
+                                name: this.state.taskText,
+                                order: this.props.setTaskOrder(),
+                                completed: false
+                            }
+                        });
+                        this.setState({taskText: ""});
+                    }}> <SendIcon fontSize="small"/></IconButton>
                 </div>
             </div>
         )

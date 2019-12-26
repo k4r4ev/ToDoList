@@ -1,25 +1,34 @@
 import React from 'react';
 import {deleteTask, completeTask} from '../actions/actions';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
+import IconButton from '@material-ui/core/IconButton';
 
 class Task extends React.Component {
     render() {
         let liClass;
         let changeTask;
         let completeTask;
+        let deleteTask;
         if (this.props.completed === true) {
             liClass = "completed";
         } else {
-            changeTask = <a onClick={() => this.props.changeTask(this.props.taskOrder, this.props.name)}>change</a>;
-            completeTask = <a onClick={() => this.props.completeTask(this.props.taskOrder)}>complete</a>
+            changeTask = <IconButton onClick={() => this.props.changeTask(this.props.taskOrder, this.props.name)}
+                                     aria-label="edit" size="small"><EditIcon fontSize="small"/></IconButton>;
+            completeTask = <IconButton onClick={() => this.props.completeTask(this.props.taskOrder)}
+                                       aria-label="add" size="small"><AddIcon fontSize="small"/></IconButton>;
         }
+        deleteTask = <IconButton onClick={() => this.props.deleteTask(this.props.taskOrder)} aria-label="delete"
+                                 size="small"> <DeleteIcon fontSize="small"/></IconButton>;
         return (
             <span>
                 <li className={liClass}>{this.props.name}</li>
                 <span>
                     {changeTask}
+                    {deleteTask}
                     {completeTask}
-                    <a onClick={() => this.props.deleteTask(this.props.taskOrder)}>delete</a>
                 </span>
             </span>
         )
@@ -27,8 +36,8 @@ class Task extends React.Component {
 }
 
 const mapStateToProps = store => {
-    localStorage.removeItem('storage');
-    localStorage.setItem('storage', JSON.stringify(store));
+    localStorage.removeItem("storage");
+    localStorage.setItem("storage", JSON.stringify(store));
     return {
         desks: store.desks
     }
