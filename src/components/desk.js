@@ -8,6 +8,7 @@ import SendIcon from '@material-ui/icons/Send';
 import AlarmIcon from '@material-ui/icons/Alarm';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import List from "@material-ui/core/List";
 
 class Desk extends React.Component {
     constructor(props) {
@@ -33,16 +34,16 @@ class Desk extends React.Component {
                         <DeleteIcon fontSize="small"/></IconButton>
                 </div>
                 <hr/>
-                <ol className="list">
+                <List component="nav" aria-label="main mailbox folders">
                     {this.props.tasks.map((currentTask) => <Task name={currentTask.name}
                                                                  taskOrder={currentTask.order}
                                                                  completed={currentTask.completed}
                                                                  deskOrder={this.props.deskOrder}
                                                                  changeTask={this.changeTask}/>)}
-                </ol>
+                </List>
                 <div>
 
-                    <TextField label="add new task" variant="standard" size="small"
+                    <TextField label="add new task" color="secondary" variant="standard" size="small"
                                InputProps={{
                                    startAdornment: (
                                        <InputAdornment position="start">
@@ -61,7 +62,7 @@ class Desk extends React.Component {
                             }
                         });
                         this.setState({taskText: ""});
-                    }}> <SendIcon fontSize="small"/></IconButton>
+                    }}> <SendIcon/></IconButton>
                 </div>
             </div>
         )

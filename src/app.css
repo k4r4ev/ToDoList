@@ -84,13 +84,21 @@ hr {
 .desk {
     width: 400px;
     border: 6px solid darkolivegreen;
-    background-color: #383838;
+    background-color: #3e3e3e;
     border-radius: 10px;
     margin: 20px;
 }
 
-.desk span span {
-    color: lightslategrey;
+.task {
+    justify-content: start !important;
+    margin: 0 !important;
+    color: lightsteelblue;
+}
+
+.task span {
+    font-size: 21px;
+    margin-left: 10px;
+    max-width: 250px;
 }
 
 .desk ol {

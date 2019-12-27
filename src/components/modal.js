@@ -1,7 +1,7 @@
 import React from 'react';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
-import IconButton from "@material-ui/core/IconButton";
+import IconButton from '@material-ui/core/IconButton';
 
 class Modal extends React.Component {
     constructor(props) {

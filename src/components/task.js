@@ -5,32 +5,33 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+
 
 class Task extends React.Component {
     render() {
-        let liClass;
+        let liClass = "task";
         let changeTask;
         let completeTask;
-        let deleteTask;
         if (this.props.completed === true) {
-            liClass = "completed";
+            liClass = "task completed";
         } else {
             changeTask = <IconButton onClick={() => this.props.changeTask(this.props.taskOrder, this.props.name)}
                                      aria-label="edit" size="small"><EditIcon fontSize="small"/></IconButton>;
             completeTask = <IconButton onClick={() => this.props.completeTask(this.props.taskOrder)}
                                        aria-label="add" size="small"><AddIcon fontSize="small"/></IconButton>;
         }
-        deleteTask = <IconButton onClick={() => this.props.deleteTask(this.props.taskOrder)} aria-label="delete"
-                                 size="small"> <DeleteIcon fontSize="small"/></IconButton>;
         return (
-            <span>
-                <li className={liClass}>{this.props.name}</li>
+            <ListItem button>
+                <ListItemText className={liClass} size="large" primary={this.props.name}/>
                 <span>
                     {changeTask}
-                    {deleteTask}
+                    <IconButton onClick={() => this.props.deleteTask(this.props.taskOrder)} aria-label="delete"
+                                size="small"> <DeleteIcon fontSize="small"/></IconButton>
                     {completeTask}
                 </span>
-            </span>
+            </ListItem>
         )
     }
 }
