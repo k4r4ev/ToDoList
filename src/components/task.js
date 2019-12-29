@@ -37,8 +37,6 @@ class Task extends React.Component {
 }
 
 const mapStateToProps = store => {
-    localStorage.removeItem("storage");
-    localStorage.setItem("storage", JSON.stringify(store));
     return {
         desks: store.desks
     }

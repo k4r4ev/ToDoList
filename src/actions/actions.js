@@ -4,6 +4,7 @@ export const CREATE_TASK = 'CREATE_TASK';
 export const DELETE_DESK = 'DELETE_DESK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const COMPLETE_TASK = 'COMPLETE_TASK';
+export const ADD_TO_DESK_IGNORE = 'ADD_TO_DESK_IGNORE';
 
 export function createDesk(desk){
     return {
@@ -42,6 +43,13 @@ export function deleteTask(order){
 export function completeTask(order){
     return {
         type: COMPLETE_TASK,
+        order
+    };
+}
+
+export function addToDeskIgnore(order){
+    return {
+        type: ADD_TO_DESK_IGNORE,
         order
     };
 }

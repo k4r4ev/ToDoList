@@ -36,11 +36,6 @@ class Body extends React.Component {
         return ++maxTaskOrder;
     };
 
-    deleteAllDesks = () => { //для модульного окна
-        this.props.deleteAll();
-        this.hideModal();
-    };
-
     hideModal = () => { //для модульного окна
         this.setState({modalWindow: ""});
     };
@@ -48,6 +43,27 @@ class Body extends React.Component {
     handleChangeDeskNameText = (event) => {
         this.setState({deskText: event.target.value});
         this.hideModal();
+    };
+
+    createDesk = () => {
+        this.props.createDesk({
+            name: this.state.deskText,
+            order: this.setDeskOrder(),
+            tasks: []
+        });
+        this.setState({deskText: ""});
+    };
+
+    showDesk = (currentDesk, index) => {
+        if (this.props.deskIgnore.indexOf(currentDesk.order) === -1) {
+            return <React.Fragment key={index}>
+                <Desk
+                    name={currentDesk.name}
+                    tasks={currentDesk.tasks}
+                    deskOrder={currentDesk.order}
+                    setTaskOrder={this.setTaskOrder}/>
+            </React.Fragment>
+        }
     };
 
     render() {
@@ -59,20 +75,13 @@ class Body extends React.Component {
                     <div className="header">
                         <TextField label="name of desk" variant="outlined" size="small"
                                    onChange={this.handleChangeDeskNameText} value={this.state.deskText}/>
-                        <IconButton aria-label="add" onClick={() => {
-                            this.props.createDesk({
-                                name: this.state.deskText,
-                                order: this.setDeskOrder(),
-                                tasks: []
-                            });
-                            this.setState({deskText: ""})
-                        }}>
+                        <IconButton aria-label="add" onClick={() => this.createDesk()}>
                             <AddIcon fontSize="large"/>
                         </IconButton>
-                        <IconButton aria-label="delete" onClick={() => {//this.props.deleteAll();
+                        <IconButton aria-label="delete" onClick={() => {
                             this.setState({
-                                modalWindow: <div><Modal deleteAllDesks={this.deleteAllDesks}
-                                                         hideModal={this.hideModal}/><Overlay/></div>
+                                modalWindow: <div><Modal desks={this.props.desks} hideModal={this.hideModal}/><Overlay/>
+                                </div>
                             })
                         }}>
                             <DeleteIcon fontSize="large"/>
@@ -80,11 +89,9 @@ class Body extends React.Component {
                     </div>
                 </div>
                 <div className="container">
-                    {this.props.desks.map((currentDesk) => <Desk
-                        name={currentDesk.name}
-                        tasks={currentDesk.tasks}
-                        deskOrder={currentDesk.order}
-                        setTaskOrder={this.setTaskOrder}/>)}
+                    {this.props.desks.map((currentDesk, index) =>
+                        this.showDesk(currentDesk, index)
+                    )}
                 </div>
             </div>
         )
@@ -92,17 +99,16 @@ class Body extends React.Component {
 }
 
 const mapStateToProps = store => {
-    localStorage.removeItem("storage");
-    localStorage.setItem("storage", JSON.stringify(store));
     return {
-        desks: store.desks
+        desks: store.main.desks,
+        deskIgnore: store.modal.deskIgnore
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         createDesk: desk => dispatch(createDesk(desk)),
-        deleteAll: desk => dispatch(deleteAll(desk))
+        deleteAll: () => dispatch(deleteAll())
     }
 };
 

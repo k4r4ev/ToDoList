@@ -14,7 +14,7 @@ class App extends React.Component {
                 <Provider store={store}>
                     <Route exact path="/auth" component={Login}/>
                     <Route exact path="/app" component={Body}/>
-                    <Redirect to="/auth"/>
+                    <Redirect to="/app"/>
                 </Provider>
             </BrowserRouter>
         )
