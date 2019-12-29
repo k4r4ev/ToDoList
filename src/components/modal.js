@@ -13,6 +13,7 @@ class Modal extends React.Component {
         else {
             this.props.desks.map((desk) => {
                 this.props.addToDeskIgnore(desk.order);
+                return desk;
             });
         }
         this.props.hideModal();

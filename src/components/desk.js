@@ -49,7 +49,7 @@ class Desk extends React.Component {
                 {this.state.modalWindow}
                 <div className="title">
                     <h2>{this.props.name}</h2>
-                    <IconButton //onClick={() => this.props.deleteDesk(this.props.deskOrder)}
+                    <IconButton
                         onClick={() => {
                             this.setState({
                                 modalWindow: <div><Modal desks={this.props.deskOrder} hideModal={this.hideModal}/><Overlay/>
