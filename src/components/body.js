@@ -1,7 +1,7 @@
 import React from 'react';
 import Desk from './desk';
 import {connect} from 'react-redux';
-import {createDesk, deleteAll} from '../actions/actions';
+import {createDesk} from '../actions/actions';
 import Modal from './modal';
 import Overlay from './overlay';
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 class Body extends React.Component {
     constructor(props) {
         super(props);
+        this.visibleDesks = [];
         this.state = {deskText: "", modalWindow: ""};
     }
 
@@ -36,7 +37,7 @@ class Body extends React.Component {
         return ++maxTaskOrder;
     };
 
-    hideModal = () => { //для модульного окна
+    hideModal = () => {
         this.setState({modalWindow: ""});
     };
 
@@ -56,6 +57,8 @@ class Body extends React.Component {
 
     showDesk = (currentDesk, index) => {
         if (this.props.deskIgnore.indexOf(currentDesk.order) === -1) {
+            if (!this.visibleDesks.includes(currentDesk.order))
+                this.visibleDesks.push(currentDesk.order);
             return <React.Fragment key={index}>
                 <Desk
                     name={currentDesk.name}
@@ -64,6 +67,12 @@ class Body extends React.Component {
                     setTaskOrder={this.setTaskOrder}/>
             </React.Fragment>
         }
+    };
+
+    deleteAllDesks = () => {
+        this.setState({
+            modalWindow: <div><Modal desks={this.visibleDesks} hideModal={this.hideModal}/><Overlay/></div>
+        })
     };
 
     render() {
@@ -78,20 +87,13 @@ class Body extends React.Component {
                         <IconButton aria-label="add" onClick={() => this.createDesk()}>
                             <AddIcon fontSize="large"/>
                         </IconButton>
-                        <IconButton aria-label="delete" onClick={() => {
-                            this.setState({
-                                modalWindow: <div><Modal desks={this.props.desks} hideModal={this.hideModal}/><Overlay/>
-                                </div>
-                            })
-                        }}>
+                        <IconButton aria-label="delete" onClick={this.deleteAllDesks}>
                             <DeleteIcon fontSize="large"/>
                         </IconButton>
                     </div>
                 </div>
                 <div className="container">
-                    {this.props.desks.map((currentDesk, index) =>
-                        this.showDesk(currentDesk, index)
-                    )}
+                    {this.props.desks.map((currentDesk, index) => this.showDesk(currentDesk, index))}
                 </div>
             </div>
         )
@@ -107,8 +109,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        createDesk: desk => dispatch(createDesk(desk)),
-        deleteAll: () => dispatch(deleteAll())
+        createDesk: desk => dispatch(createDesk(desk))
     }
 };
 

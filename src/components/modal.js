@@ -7,15 +7,12 @@ import {connect} from "react-redux";
 
 class Modal extends React.Component {
     delete = () => {
-        if (Number.isInteger(this.props.desks)){
-            this.props.addToDeskIgnore(this.props.desks);
-        }
-        else {
-            this.props.desks.map((desk) => {
-                this.props.addToDeskIgnore(desk.order);
-                return desk;
-            });
-        }
+        this.props.desks.map((order) => {
+            if (!this.props.deskIgnore.includes(order)) {
+                this.props.addToDeskIgnore(order);
+            }
+            return order;
+        });
         this.props.hideModal();
     };
 

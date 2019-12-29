@@ -1,6 +1,6 @@
 import React from 'react';
 import Task from './task';
-import {createTask, deleteTask, deleteDesk} from '../actions/actions';
+import {createTask, deleteTask} from '../actions/actions';
 import {connect} from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -18,7 +18,7 @@ class Desk extends React.Component {
         this.state = {taskText: "", modalWindow: ""};
     }
 
-    hideModal = () => { //для модульного окна
+    hideModal = () => {
         this.setState({modalWindow: ""});
     };
 
@@ -43,18 +43,20 @@ class Desk extends React.Component {
         this.setState({taskText: ""});
     };
 
+    deleteDesk = () => {
+        this.setState({
+            modalWindow: <span><Modal desks={[this.props.deskOrder]}
+                                      hideModal={this.hideModal}/><Overlay/></span>
+        })
+    };
+
     render() {
         return (
             <div className="desk" draggable="true">
                 {this.state.modalWindow}
                 <div className="title">
                     <h2>{this.props.name}</h2>
-                    <IconButton
-                        onClick={() => {
-                            this.setState({
-                                modalWindow: <div><Modal desks={this.props.deskOrder} hideModal={this.hideModal}/><Overlay/>
-                                </div>
-                            })}}  aria-label="delete">
+                    <IconButton onClick={this.deleteDesk} aria-label="delete">
                         <DeleteIcon fontSize="small"/></IconButton>
                 </div>
                 <hr/>
@@ -97,7 +99,6 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        deleteDesk: order => dispatch(deleteDesk(order)),
         deleteTask: order => dispatch(deleteTask(order)),
         createTask: task => dispatch(createTask(task))
     }
