@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 class Overlay extends React.Component {
-    render() {
-        return (
-            <div className="overlay"/>
-        )
-    }
+  render () {
+    return (
+      <div className="overlay"/>
+    )
+  }
 }
 
-export default Overlay;
+export default Overlay
