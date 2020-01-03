@@ -8,17 +8,17 @@ import Login from './components/login'
 import './app.css'
 
 class App extends React.Component {
-  render () {
-    return (
-      <BrowserRouter>
-        <Provider store={store}>
-          <Route exact path="/auth" component={Login}/>
-          <Route exact path="/app" component={Body}/>
-          <Redirect to="/auth"/>
-        </Provider>
-      </BrowserRouter>
-    )
-  }
+    render () {
+        return (
+            <BrowserRouter>
+                <Provider store={store}>
+                    <Route exact path="/auth" component={Login}/>
+                    <Route exact path="/app" component={Body}/>
+                    <Redirect to="/auth"/>
+                </Provider>
+            </BrowserRouter>
+        )
+    }
 
 }
 

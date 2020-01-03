@@ -9,44 +9,44 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
 class Task extends React.Component {
-  render () {
-    let liClass = 'task'
-    let changeTask
-    let completeTask
-    if (this.props.completed === true) {
-      liClass = 'task completed'
-    } else {
-      changeTask = <IconButton onClick={() => this.props.changeTask(this.props.taskOrder, this.props.name)}
-                               aria-label="edit" size="small"><EditIcon fontSize="small"/></IconButton>
-      completeTask = <IconButton onClick={() => this.props.completeTask(this.props.taskOrder)}
-                                 aria-label="add" size="small"><AddIcon fontSize="small"/></IconButton>
-    }
-    return (
-      <ListItem button>
-        <ListItemText className={liClass} size="large"
-                      primary={(this.props.index + 1) + '. ' + this.props.name}/>
-        <span>
+    render () {
+        let liClass = 'task'
+        let changeTask
+        let completeTask
+        if (this.props.completed === true) {
+            liClass = 'task completed'
+        } else {
+            changeTask = <IconButton onClick={() => this.props.changeTask(this.props.taskOrder, this.props.name)}
+                                     aria-label="edit" size="small"><EditIcon fontSize="small"/></IconButton>
+            completeTask = <IconButton onClick={() => this.props.completeTask(this.props.taskOrder)}
+                                       aria-label="add" size="small"><AddIcon fontSize="small"/></IconButton>
+        }
+        return (
+            <ListItem button>
+                <ListItemText className={liClass} size="large"
+                              primary={(this.props.index + 1) + '. ' + this.props.name}/>
+                <span>
                     {changeTask}
-          <IconButton onClick={() => this.props.deleteTask(this.props.taskOrder)} aria-label="delete"
-                      size="small"> <DeleteIcon fontSize="small"/></IconButton>
-          {completeTask}
+                    <IconButton onClick={() => this.props.deleteTask(this.props.taskOrder)} aria-label="delete"
+                                size="small"> <DeleteIcon fontSize="small"/></IconButton>
+                    {completeTask}
                 </span>
-      </ListItem>
-    )
-  }
+            </ListItem>
+        )
+    }
 }
 
 const mapStateToProps = store => {
-  return {
-    desks: store.desks
-  }
+    return {
+        desks: store.desks
+    }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    deleteTask: order => dispatch(deleteTask(order)),
-    completeTask: order => dispatch(completeTask(order))
-  }
+    return {
+        deleteTask: order => dispatch(deleteTask(order)),
+        completeTask: order => dispatch(completeTask(order))
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Task)
