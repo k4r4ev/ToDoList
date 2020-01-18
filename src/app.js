@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import store from './store/store'
 import Body from './components/body'
 import Login from './components/login'
-import './app.css'
+import './stylesheets/app.css'
 
 class App extends React.Component {
     render () {

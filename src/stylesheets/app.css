@@ -1,0 +1,156 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Revalia';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Revalia-Regular'), url(https://fonts.gstatic.com/s/revalia/v7/WwkexPimBE2-4ZPESV3kMA.ttf) format('truetype');
+}
+body {
+  margin: 0;
+  background-color: #333333;
+  font-family: Roboto, serif;
+}
+.login {
+  width: 250px;
+  height: 200px;
+  border: 6px solid #862d2d;
+  border-radius: 10px;
+  background-color: #383838;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.login p {
+  font-size: 17px;
+  text-transform: uppercase;
+  color: #f3f6ff;
+  margin: 0;
+}
+h2 {
+  font-size: 25px;
+  text-align: center;
+  color: lightsteelblue;
+  outline: none;
+}
+hr {
+  border: none;
+  color: darkolivegreen;
+  background-color: darkolivegreen;
+  height: 4px;
+}
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.panel {
+  width: 100%;
+  height: 50px;
+  background-color: #862d2d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-family: Revalia, serif;
+  font-weight: bolder;
+  font-size: 30px;
+  text-align: center;
+  color: #959b8b;
+  margin-left: 20px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-right: 20px;
+}
+.desk {
+  width: 400px;
+  border: 6px solid darkolivegreen;
+  background-color: #3e3e3e;
+  border-radius: 4px;
+  margin: 20px;
+}
+.desk ol {
+  color: lightsteelblue;
+}
+.desk li {
+  font-size: 20px;
+  width: 300px;
+  outline: none;
+}
+.desk div {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.task {
+  justify-content: start !important;
+  margin: 0 !important;
+  color: lightsteelblue;
+}
+.task span {
+  font-size: 21px;
+  margin-left: 10px;
+  max-width: 250px;
+}
+.completed {
+  text-decoration: line-through;
+}
+.modal {
+  width: 250px;
+  height: 130px;
+  border-radius: 10px;
+  background-color: #862d2d;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+}
+.modal p {
+  font-size: 16px;
+  color: #f3f6ff;
+}
+.modal div {
+  width: 200px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.overlay {
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/*# sourceMappingURL=app.css.map */
