@@ -21,10 +21,10 @@ class Modal extends React.Component {
             <div className="modal">
                 <p>Are you sure?</p>
                 <div>
-                    <IconButton aria-label="check" color="primary" onClick={this.delete}> <CheckIcon
-                        fontSize="large"/></IconButton>
-                    <IconButton aria-label="close" color="primary" onClick={this.props.hideModal}> <CloseIcon
-                        fontSize="large"/></IconButton>
+                    <IconButton aria-label="check" color="primary" className="modal__button" onClick={this.delete}>
+                        <CheckIcon fontSize="large"/></IconButton>
+                    <IconButton aria-label="close" color="primary" className="modal__button"
+                                onClick={this.props.hideModal}> <CloseIcon fontSize="large"/></IconButton>
                 </div>
             </div>
         )

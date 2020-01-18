@@ -68,6 +68,11 @@ hr {
   justify-content: space-between;
   align-items: center;
 }
+@media (max-width: 480px) {
+  .panel {
+    justify-content: center;
+  }
+}
 .logo {
   font-family: Revalia, serif;
   font-weight: bolder;
@@ -76,12 +81,22 @@ hr {
   color: #959b8b;
   margin-left: 20px;
 }
+@media (max-width: 480px) {
+  .logo {
+    display: none;
+  }
+}
 .header {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   margin-right: 20px;
+}
+@media (max-width: 480px) {
+  .header {
+    margin-right: 0;
+  }
 }
 .desk {
   width: 400px;
@@ -143,8 +158,11 @@ hr {
   align-items: center;
   justify-content: space-evenly;
 }
+.modal__button * {
+  color: #f3f6ff;
+}
 .overlay {
-  position: absolute;
+  position: fixed;
   margin: 0 !important;
   top: 0;
   left: 0;
