@@ -2,17 +2,12 @@ import React from 'react'
 import CheckIcon from '@material-ui/icons/Check'
 import CloseIcon from '@material-ui/icons/Close'
 import IconButton from '@material-ui/core/IconButton'
-import { addToDeskIgnore } from '../actions/actions'
+import { addToDeleteList } from '../actions/actions'
 import { connect } from 'react-redux'
 
 class Modal extends React.Component {
     delete = () => {
-        this.props.desks.map((order) => {
-            if (!this.props.deskIgnore.includes(order)) {
-                this.props.addToDeskIgnore(order)
-            }
-            return order
-        })
+        this.props.desksId.map((currentId) => this.props.addToDeleteList(currentId))
         this.props.hideModal()
     }
 
@@ -33,13 +28,13 @@ class Modal extends React.Component {
 
 const mapStateToProps = store => {
     return {
-        deskIgnore: store.modal.deskIgnore
+        desksIdToDelete: store.modal.desksId
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addToDeskIgnore: (order) => dispatch(addToDeskIgnore(order))
+        addToDeleteList: (order) => dispatch(addToDeleteList(order))
     }
 }
 

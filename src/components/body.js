@@ -1,7 +1,7 @@
 import React from 'react'
 import Desk from './desk'
 import { connect } from 'react-redux'
-import { createDesk } from '../actions/actions'
+import { clearDeleteList, createDesk, deleteDesk } from '../actions/actions'
 import Modal from './modal'
 import Overlay from './overlay'
 import TextField from '@material-ui/core/TextField'
@@ -12,10 +12,11 @@ import IconButton from '@material-ui/core/IconButton'
 class Body extends React.Component {
     constructor (props) {
         super(props)
-        this.visibleDesks = []
+        this.desksId = []
         this.state = {
             deskText: '',
-            modalWindow: ''
+            modalWindow: '',
+            desksIdToDelete: []
         }
     }
 
@@ -50,6 +51,27 @@ class Body extends React.Component {
         this.hideModal()
     }
 
+    deleteDesks = () => {
+        if (this.props.desksIdToDelete.length !== 0) {
+            this.props.desksIdToDelete.map(current => this.props.deleteDesk(current))
+            this.desksId = []
+            this.props.clearDeleteList()
+        }
+    }
+
+    prepareDesk = (currentDesk, index) => {
+        if (!this.desksId.includes(currentDesk.order)) {
+            this.desksId.push(currentDesk.order)
+        }
+        return <React.Fragment key={index}>
+            <Desk
+                name={currentDesk.name}
+                tasks={currentDesk.tasks}
+                deskOrder={currentDesk.order}
+                setTaskOrder={this.setTaskOrder}/>
+        </React.Fragment>
+    }
+
     createDesk = () => {
         this.props.createDesk({
             name: this.state.deskText,
@@ -59,28 +81,14 @@ class Body extends React.Component {
         this.setState({ deskText: '' })
     }
 
-    showDesk = (currentDesk, index) => {
-        if (this.props.deskIgnore.indexOf(currentDesk.order) === -1) {
-            if (!this.visibleDesks.includes(currentDesk.order)) {
-                this.visibleDesks.push(currentDesk.order)
-            }
-            return <React.Fragment key={index}>
-                <Desk
-                    name={currentDesk.name}
-                    tasks={currentDesk.tasks}
-                    deskOrder={currentDesk.order}
-                    setTaskOrder={this.setTaskOrder}/>
-            </React.Fragment>
-        }
-    }
-
     deleteAllDesks = () => {
         this.setState({
-            modalWindow: <div><Modal desks={this.visibleDesks} hideModal={this.hideModal}/><Overlay/></div>
+            modalWindow: <div><Modal desksId={this.desksId} hideModal={this.hideModal}/><Overlay/></div>
         })
     }
 
     render () {
+        this.deleteDesks()
         return (
             <div>
                 {this.state.modalWindow}
@@ -98,7 +106,7 @@ class Body extends React.Component {
                     </div>
                 </div>
                 <div className="container">
-                    {this.props.desks.map((currentDesk, index) => this.showDesk(currentDesk, index))}
+                    {this.props.desks.map((currentDesk, index) => this.prepareDesk(currentDesk, index))}
                 </div>
             </div>
         )
@@ -108,13 +116,15 @@ class Body extends React.Component {
 const mapStateToProps = store => {
     return {
         desks: store.main.desks,
-        deskIgnore: store.modal.deskIgnore
+        desksIdToDelete: store.modal.desksId
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        createDesk: desk => dispatch(createDesk(desk))
+        createDesk: desk => dispatch(createDesk(desk)),
+        deleteDesk: order => dispatch(deleteDesk(order)),
+        clearDeleteList: () => dispatch(clearDeleteList())
     }
 }
 

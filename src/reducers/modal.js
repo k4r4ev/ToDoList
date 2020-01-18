@@ -1,15 +1,20 @@
-import { ADD_TO_DESK_IGNORE } from '../actions/actions'
+import { ADD_TO_DELETE_LIST, CLEAR_DELETE_LIST } from '../actions/actions'
 
-const initialState = (localStorage.length === 0) ? {
-    deskIgnore: []
-} : (JSON.parse(localStorage.getItem('storage'))).modal
+const initialState = {
+    desksId: []
+}
 
 export function modalReducer (state = initialState, action) {
     switch (action.type) {
-        case ADD_TO_DESK_IGNORE:
+        case ADD_TO_DELETE_LIST:
             return {
                 ...state,
-                deskIgnore: [...state.deskIgnore, action.order]
+                desksId: [...state.desksId, action.order]
+            }
+        case CLEAR_DELETE_LIST:
+            return {
+                ...state,
+                desksId: []
             }
         default:
             return state

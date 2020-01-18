@@ -134,9 +134,8 @@ hr {
 }
 .modal {
   width: 250px;
-  height: 130px;
-  border-radius: 10px;
-  background-color: #862d2d;
+  border-radius: 4px;
+  background-color: darkslategrey;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -149,6 +148,8 @@ hr {
 .modal p {
   font-size: 16px;
   color: #f3f6ff;
+  text-transform: uppercase;
+  font-weight: bolder;
 }
 .modal div {
   width: 200px;

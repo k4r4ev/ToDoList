@@ -10,7 +10,7 @@ const initialState = (localStorage.length === 0) ? {
             order: 0
         }]
     }]
-} : (JSON.parse(localStorage.getItem('storage'))).main
+} : (JSON.parse(localStorage.getItem('storage')))
 
 export function mainReducer (state = initialState, action) {
     switch (action.type) {

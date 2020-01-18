@@ -4,7 +4,8 @@ export const CREATE_TASK = 'CREATE_TASK'
 export const DELETE_DESK = 'DELETE_DESK'
 export const DELETE_TASK = 'DELETE_TASK'
 export const COMPLETE_TASK = 'COMPLETE_TASK'
-export const ADD_TO_DESK_IGNORE = 'ADD_TO_DESK_IGNORE'
+export const ADD_TO_DELETE_LIST = 'ADD_TO_DESK_IGNORE'
+export const CLEAR_DELETE_LIST = 'CLEAR_DELETE_LIST'
 
 export function createDesk (desk) {
     return {
@@ -47,9 +48,15 @@ export function completeTask (order) {
     }
 }
 
-export function addToDeskIgnore (order) {
+export function addToDeleteList (order) {
     return {
-        type: ADD_TO_DESK_IGNORE,
+        type: ADD_TO_DELETE_LIST,
         order
+    }
+}
+
+export function clearDeleteList () {
+    return {
+        type: CLEAR_DELETE_LIST
     }
 }

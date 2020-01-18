@@ -3,7 +3,7 @@ import { rootReducer } from '../reducers/reducers'
 
 const saveToLocalStorage = store => {
     localStorage.removeItem('storage')
-    localStorage.setItem('storage', JSON.stringify(store))
+    localStorage.setItem('storage', JSON.stringify(store.main))
 }
 
 const store = createStore(rootReducer)

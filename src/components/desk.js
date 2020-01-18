@@ -48,7 +48,7 @@ class Desk extends React.Component {
 
     deleteDesk = () => {
         this.setState({
-            modalWindow: <span><Modal desks={[this.props.deskOrder]}
+            modalWindow: <span><Modal desksId={[this.props.deskOrder]}
                                       hideModal={this.hideModal}/><Overlay/></span>
         })
     }
