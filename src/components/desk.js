@@ -55,7 +55,7 @@ class Desk extends React.Component {
 
     render () {
         return (
-            <div className="desk" draggable="true">
+            <div className="desk">
                 {this.state.modalWindow}
                 <div className="title">
                     <h2>{this.props.name}</h2>
