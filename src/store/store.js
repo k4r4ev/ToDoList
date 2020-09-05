@@ -1,15 +1,15 @@
-import { createStore } from 'redux'
-import { rootReducer } from '../reducers/reducers'
+import { createStore } from "redux";
+import { rootReducer } from "../reducers/reducers";
 
-const saveToLocalStorage = store => {
-    localStorage.removeItem('storage')
-    localStorage.setItem('storage', JSON.stringify(store.main))
-}
+const saveToLocalStorage = (store) => {
+  localStorage.removeItem("storage");
+  localStorage.setItem("storage", JSON.stringify(store.main));
+};
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer);
 
-export default store
+export default store;
 
 store.subscribe(() => {
-    saveToLocalStorage(store.getState())
-})
+  saveToLocalStorage(store.getState());
+});
